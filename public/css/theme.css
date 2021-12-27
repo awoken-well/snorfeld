@@ -1,0 +1,12 @@
+:root {
+    --back-color: rgb(30,32,34);
+    --secondary-back-color: rgb(60,100,70);
+    --primary-front-color: rgb(206,219,218);
+    --emphasis-front-color: rgb(129,201,246);
+    --selection-color: rgb(56,63,72);
+    --primary-hover-back-color: rgb(41,44,49);
+    --primary-hover-front-color: #eee;
+
+    --ui-selected-front-color: rgb(129,246,201);
+    --ui-selected-back-color: rgb(64,123,100);
+}
