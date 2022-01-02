@@ -17,4 +17,21 @@ $: fragmentList = Object.values($fragments).sort((a,b) => ('' + get(a).path).loc
 	{/each}
 </ul>
 
+<style>
+	ul {
+		overflow-y: scroll;
+		position: absolute;
+		overflow-x: hidden;
+		width: 100%;
+		height: 100%;
+		padding: 0.5em;
+		list-style: none;
+		font-size: 0.8em;
+		box-sizing: border-box;
+	}
 
+	li {
+		white-space: nowrap;
+    	overflow: hidden;
+	}
+</style>

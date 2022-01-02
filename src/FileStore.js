@@ -1,25 +1,16 @@
-import { readable } from 'svelte/store'
+import { writable } from 'svelte/store'
 
-let set = null
 let _files = {}
 
-export const files = readable({},(_set) => {
-        set = _set
-
-        // first subscriber (DO THIS VIA MENU AND STORED DEFAULT PROJECT)
-        // window.api.send('watch:start', {
-        //     path: '/Users/olafjanssen/Downloads/nanowrimo2021'
-        // })
-
-        window.api.send('project:openlast')
-
-        return () => {
-            // no more subscribers
-            console.log("stop watching")
-        }
-    })
+export const files = writable({})
     
+    function resetProject(){
+        _files = {}
+        files.set(_files)
+    }
+
     window.api.receive('project:opened', (data) => {
+        resetProject()
         console.log("opening project at:", data.path)
         document.title = data.path
         window.api.send('watch:start', {
@@ -27,23 +18,28 @@ export const files = readable({},(_set) => {
         })
     })
 
+    window.api.receive('project:closed', () => {
+        resetProject()
+    })
+
 
     window.api.receive('watch:added', (data) => {
         console.log('file add received')
         _files[data.path] = data
-        set(_files)
+        files.set(_files)
     })
     
     window.api.receive('watch:removed', (data) => {
         console.log('file remove received')
         delete _files[data.path]
-        set(_files)
+        files.set(_files)
     })
     
     window.api.receive('watch:updated', (data) => {
         console.log('file update received')
         _files[data.path] = data
-        set(_files)
+        files.set(_files)
+        console.log('done setting')
     })
 
     export const updateRawText = (path, raw) => {

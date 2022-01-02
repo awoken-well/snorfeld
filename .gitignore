@@ -111,4 +111,4 @@ test
 out
 
 # Svelte build folder
-public/build/
+public/build

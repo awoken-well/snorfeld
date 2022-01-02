@@ -1,57 +1,26 @@
 const {
-    app,
-    BrowserWindow,
-    ipcMain
+    app, ipcMain
 } = require("electron");
-const path = require("path");
 
-const Store = require('electron-store');
+const Store = require('electron-store')
+const store = new Store()
 
+const windowManager = require('./windows.js')(store)
 
 app.on("ready", () => {
-    const mainWindow = new BrowserWindow({
-        width: 600,
-        height: 800,
-        title: "Snorfeld",
-        webPreferences: {
-            nodeIntegration: false, // is default value after Electron v5
-            contextIsolation: true, // protect against prototype pollution
-            enableRemoteModule: false, // turn off remote
-            preload: path.join(__dirname, "preload.js") // use a preload script
-        }
-    });
-
-    const watcher = require("./watcher.js")(ipcMain, mainWindow);
-
-    // Emitted when the window is closed.
-    mainWindow.on('closed', function () {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        mainWindow = null;
-    });
-
-    mainWindow.loadFile(path.join(__dirname, "../public/index.html"));
-    mainWindow.webContents.openDevTools();
-
-
-    // application settings stored in the store
-    const store = new Store()
-
-    // add the application menu
-    require('./menu.js')(ipcMain, mainWindow, store)
-
     // open last project
     ipcMain.on('project:openlast', (event, args) => {
         const projectPath = store.get('lastProjectFolder')
         if (projectPath) {
             console.log('opening last folder: ', projectPath);
-            mainWindow.webContents.send('project:opened', {
+            event.sender.send('project:opened', {
                 path: projectPath
             })
         }
     })
 
+    const projectPath = store.get('lastProjectFolder')
+    windowManager.createWindow(projectPath)
 })
 
 app.on('window-all-closed', function () {
@@ -60,4 +29,10 @@ app.on('window-all-closed', function () {
     if (process.platform != 'darwin') {
         app.quit();
     }
-});
+})
+
+app.on('activate', () => {
+    // On macOS it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (windows.size === 0) windowManager.createWindow();
+})

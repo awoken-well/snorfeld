@@ -25,6 +25,7 @@
 
     .container > * {
         overflow: hidden;
+        position: relative;
     }
 
     .left {

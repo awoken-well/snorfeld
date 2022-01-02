@@ -4,30 +4,48 @@ const {
     dialog
 } = require('electron')
 
-module.exports = (ipcMain, mainWindow, store) => {
+module.exports = (ipcMain, windowManager, store) => {
     const template = [{
-            label: 'File',
+            label: '&File',
             submenu: [{
-                label: 'Open Folder',
-                click: async () => {
-                    console.log('clicked!')
-                    const result = await dialog.showOpenDialog(mainWindow, {
-                        properties: ['openDirectory']
-                    })
-                    if (!result.canceled) {
-                        let path = result.filePaths[0]
-
-                        store.set('lastProjectFolder', path);
-
-                        mainWindow.webContents.send('project:opened', {
-                            path: path
-                        })
+                    label: 'New Window',
+                    click: async (menuItem, browserWindow, event) => {
+                        windowManager.createWindow()
                     }
-                }
-            }]
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: 'Open Project',
+                    click: async (menuItem, browserWindow, event) => {
+                        const result = await dialog.showOpenDialog(browserWindow, {
+                            properties: ['openDirectory']
+                        })
+                        if (!result.canceled) {
+                            let path = result.filePaths[0]
+
+                            store.set('lastProjectFolder', path)
+
+                            browserWindow.webContents.send('project:opened', {
+                                path: path
+                            })
+                        }
+                    }
+                },
+                {
+                    type: 'separator'
+                },
+                {
+                    label: 'Close Project',
+                    click: async (menuItem, browserWindow, event) => {
+                        browserWindow.webContents.send('project:closed')
+                    }
+                },
+            ]
         },
         {
-            label: 'Edit',
+            label: '&Edit',
             submenu: [{
                     role: 'undo'
                 },
@@ -58,7 +76,7 @@ module.exports = (ipcMain, mainWindow, store) => {
             ]
         },
         {
-            label: 'View',
+            label: '&Aap',
             submenu: [{
                     label: 'Reload',
                     accelerator: 'CmdOrCtrl+R',
@@ -148,7 +166,7 @@ module.exports = (ipcMain, mainWindow, store) => {
             ]
         })
         // Edit menu.
-        template[1].submenu.push({
+        template[2].submenu.push({
             type: 'separator'
         }, {
             label: 'Speech',
@@ -161,7 +179,7 @@ module.exports = (ipcMain, mainWindow, store) => {
             ]
         })
         // Window menu.
-        template[3].submenu = [{
+        template[4].submenu = [{
                 label: 'Close',
                 accelerator: 'CmdOrCtrl+W',
                 role: 'close'
@@ -187,5 +205,4 @@ module.exports = (ipcMain, mainWindow, store) => {
 
     const menu = Menu.buildFromTemplate(template)
     Menu.setApplicationMenu(menu)
-
 }

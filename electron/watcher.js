@@ -6,12 +6,16 @@ const fs = require("fs");
 module.exports = function Watcher(ipcMain, win) {
 
     ipcMain.on('watch:start', (event, args) => {
+        if (win.webContents.id != event.sender.id) return
         console.log('Started watching: ', args.path)
+        console.log(win.webContents.id, event.sender.id)
+
         const path = args.path;
         watch(path);
     });
 
     ipcMain.on('file:write', (event, args) => {
+        if (win.webContents.id != event.sender.id) return
         console.log('Saving', args.path)
         save(args.path, args.raw)
     });
@@ -21,6 +25,7 @@ module.exports = function Watcher(ipcMain, win) {
     async function watch(path) {
         // stop watching old folder if watcher already exists
         if (watcher) {
+            console.log("stop old watcher")
             await watcher.close()
         }
 
@@ -81,4 +86,12 @@ module.exports = function Watcher(ipcMain, win) {
         fs.writeFileSync(path, raw)
     }
 
+    return {
+        stop: () => {
+            if (watcher) {
+                console.log("stop old watcher")
+                watcher.close()
+            }
+        }
+    }
 }

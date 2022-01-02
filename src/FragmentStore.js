@@ -1,6 +1,5 @@
 import {
     derived,
-    readable,
     writable,
     get
 } from 'svelte/store'
@@ -13,6 +12,7 @@ let _fragments = {}
 export const fragments = derived(files, $files => {
     let __fragments = {}
     Object.values($files).forEach(f => {
+        console.log('updating fragment:', f.path)
         if (!_fragments[f.path] || get(_fragments[f.path]).lastModified != f.lastModified) {
             let fragment = {
                 id: f.path,
@@ -23,13 +23,14 @@ export const fragments = derived(files, $files => {
                 parsed: f.parsed
             }
             if (!_fragments[f.path]){
-                __fragments[f.path] = writable(fragment)
+                console.log('create writable')
+                _fragments[f.path] = writable(fragment)
             } else {
-                __fragments[f.path].set(fragment)
+                console.log('update writable', __fragments[f.path])
+                _fragments[f.path].set(fragment)
             }
-        } else {
-            __fragments[f.path] = _fragments[f.path]
-        }
+        } 
+        __fragments[f.path] = _fragments[f.path]
     })
     _fragments = __fragments
     return _fragments
