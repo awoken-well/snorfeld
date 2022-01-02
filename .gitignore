@@ -109,3 +109,6 @@ test
 
 # Electron Forge output
 out
+
+# Svelte build folder
+public/build
