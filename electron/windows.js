@@ -26,7 +26,7 @@ const createWindow = async (projectPath) => {
     const watcher = require("./watcher.js")(ipcMain, newWindow)
 
     newWindow.loadFile(path.join(__dirname, "../public/index.html"))
-    newWindow.webContents.openDevTools()
+    // newWindow.webContents.openDevTools()
 
     newWindow.webContents.on('did-finish-load', () => {
         if (!newWindow) {

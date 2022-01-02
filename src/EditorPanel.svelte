@@ -21,9 +21,10 @@ $: {
         existingDocument = document
     } 
 }
+
 </script>
 
-<div bind:this={scrollElement} class="mirror">
+<div bind:this={scrollElement} class="mirror" class:hide={!document}>
     <CodeMirror bind:editor options={{ mode: 'yaml-frontmatter',
         lineWrapping: true,
         inputStyle: 'contenteditable',
@@ -32,6 +33,9 @@ $: {
 </div>
 
 <style>
+    .hide {
+        visibility: hidden;
+    }
 .mirror {
     overflow-y: scroll;
     width: 100%;

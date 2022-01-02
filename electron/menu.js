@@ -76,7 +76,7 @@ module.exports = (ipcMain, windowManager, store) => {
             ]
         },
         {
-            label: '&Aap',
+            label: '&View',
             submenu: [{
                     label: 'Reload',
                     accelerator: 'CmdOrCtrl+R',
@@ -171,6 +171,9 @@ module.exports = (ipcMain, windowManager, store) => {
         }, {
             label: 'Speech',
             submenu: [{
+                    role: 'toggleSpellChecker'
+                },
+                {
                     role: 'startspeaking'
                 },
                 {
