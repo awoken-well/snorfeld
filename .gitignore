@@ -103,7 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
-
 # Test data
 test
 .DS_Store
+
+# Electron Forge output
+out
