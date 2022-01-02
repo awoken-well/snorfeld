@@ -1,0 +1,63 @@
+.mirror .CodeMirror {
+    height: auto;
+    background: var(--back-color);
+    color: var(--primary-front-color);
+    font-family: inherit;
+    line-height: 1.6em;
+    width: 80%;
+    margin: 2em auto;
+}
+
+.mirror .CodeMirror-line::selection, 
+.mirror .CodeMirror-line > span::selection, 
+.mirror .CodeMirror-line > span > span::selection,
+.mirror span.CodeMirror-selectedtext {
+    background: var(--selection-color);
+}
+
+/* Headers */
+.mirror .CodeMirror .cm-header,
+.mirror .CodeMirror .cm-header-2 {
+    color: var(--emphasis-front-color);
+}
+
+.mirror .CodeMirror .cm-header-1 {
+    font-size: 1.5em;
+}
+.mirror .CodeMirror .cm-header-2 {
+    font-size: 1.25em;
+}
+
+.mirror .CodeMirror .cm-formatting-header {
+    font-size: inherit;
+    opacity: 0.5;
+}
+
+/* Strong and emphasis */
+.mirror .CodeMirror .cm-strong,
+.mirror .CodeMirror .cm-em {
+    color: var(--emphasis-front-color);
+}
+
+.mirror .CodeMirror .cm-formatting-strong,
+.mirror .CodeMirror .cm-formatting-em {
+    opacity: 0.5;
+}
+
+.mirror .CodeMirror .cm-def,
+.mirror .CodeMirror .cm-atom,
+.mirror .CodeMirror .cm-meta {
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--emphasis-front-color)
+}
+
+.mirror .CodeMirror .cm-meta + * {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.mirror .CodeMirror .cm-string,
+.mirror .CodeMirror .cm-keyword,
+.mirror .CodeMirror .cm-number {
+    font-family: 'Courier New', Courier, monospace;
+    color: inherit;
+}   

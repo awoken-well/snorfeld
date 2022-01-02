@@ -1,38 +1,31 @@
 {
   "name": "snorfeld",
-  "version": "0.0.1",
-  "description": "A cross-platform Markdown editor with Front-Matter with extras",
-  "main": "app.mjs",
+  "version": "1.0.0",
+  "private": true,
+  "main": "electron/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "start": "electron ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/awoken-well/snorfeld.git"
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.0",
+    "electron": "^16.0.5",
+    "electron-reload": "^2.0.0-alpha.1",
+    "rollup": "^2.3.4",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0"
   },
-  "keywords": [
-    "markdown",
-    "editor",
-    "yaml",
-    "front-matter",
-    "noveling",
-    "writing"
-  ],
-  "author": "Olaf T.A. Janssen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/awoken-well/snorfeld/issues"
-  },
-  "homepage": "https://github.com/awoken-well/snorfeld#readme",
   "dependencies": {
     "chokidar": "^3.5.2",
     "codemirror": "^5.65.0",
-    "express": "^4.17.2",
+    "electron-store": "^8.0.1",
     "gray-matter": "^4.0.3",
-    "react": "^17.0.2",
-    "slate": "^0.72.3",
-    "slate-history": "^0.66.0",
-    "slate-react": "^0.72.1",
-    "socket.io": "^4.4.0"
+    "monaco-editor": "^0.18.1",
+    "sirv-cli": "^1.0.0"
   }
 }

@@ -1,34 +1,18 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Snorfeld</title>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-    <script src="./node_modules/codemirror/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="./node_modules/codemirror/lib/codemirror.css">
-    <script src="./node_modules/codemirror/mode/markdown/markdown.js"></script>
-    <script src="./node_modules/codemirror/addon/selection/mark-selection.js"></script>
-    <script src="./node_modules/codemirror/addon/mode/overlay.js"></script>
-    <script src="./node_modules/codemirror/mode/gfm/gfm.js"></script>
-    <script src="./node_modules/codemirror/mode/yaml/yaml.js"></script>
-    <script src="./node_modules/codemirror/mode/yaml-frontmatter/yaml-frontmatter.js"></script>
+	<title>Snorfeld</title>
 
-    <script src="/socket.io/socket.io.js"></script>
+	<link rel='icon' type='image/png' href='favicon.png'>
+	<link rel='stylesheet' href='global.css'>
+	<link rel='stylesheet' href='build/bundle.css'>
 
-    <link rel="stylesheet" href="css/app.css">
-  </head>
-  <body>
-    <div class="main-grid">
-      <div class="main-left">
-        <list-panel></list-panel>
-      </div>
-      <div class="main-content">
-        <editor-panel></editor-panel>
-      </div>
-    </div>
-    <!-- Load our App component. -->
+	<script defer type="module" src='build/main.js'></script>
+</head>
 
-    <script type="module" src="app.mjs"></script>
-
-  </body>
+<body>
+</body>
 </html>
