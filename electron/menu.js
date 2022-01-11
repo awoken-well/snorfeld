@@ -4,7 +4,7 @@ const {
     dialog
 } = require('electron')
 
-module.exports = (ipcMain, windowManager, store) => {
+module.exports = (ipcMain, windowManager, settings) => {
     const template = [{
             label: '&File',
             submenu: [{
@@ -25,13 +25,19 @@ module.exports = (ipcMain, windowManager, store) => {
                         if (!result.canceled) {
                             let path = result.filePaths[0]
 
-                            store.set('lastProjectFolder', path)
+                            settings.setLastProject(path)
 
                             browserWindow.webContents.send('project:opened', {
                                 path: path
                             })
                         }
                     }
+                },
+                {
+                    label: 'Open Recent',
+                    submenu: [{
+                        label: 'placeholder'
+                    }]
                 },
                 {
                     type: 'separator'
@@ -205,6 +211,17 @@ module.exports = (ipcMain, windowManager, store) => {
             }
         ]
     }
+
+    const history = settings.getProjectHistory()
+    template[1].submenu[3].submenu = history.map((path)=>{
+        return {
+            label: path,
+            click: async (menuItem, browserWindow, event) => {
+                browserWindow.webContents.send('project:opened', {
+                    path: path
+                })
+            }
+        }})
 
     const menu = Menu.buildFromTemplate(template)
     Menu.setApplicationMenu(menu)

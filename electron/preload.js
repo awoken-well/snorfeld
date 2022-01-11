@@ -1,7 +1,9 @@
 const {
     contextBridge,
     ipcRenderer
-} = require("electron");
+} = require("electron")
+
+const settings = require('./store.js')
 
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
@@ -14,7 +16,8 @@ contextBridge.exposeInMainWorld(
                 'file:write',
                 'file:rename',
                 'parser:parse','parser:string',
-                'project:openlast'];
+                'project:openlast',
+                'settings:projecthistory'];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);
             }
@@ -28,6 +31,9 @@ contextBridge.exposeInMainWorld(
                 // Deliberately strip event as it includes `sender` 
                 ipcRenderer.on(channel, (event, ...args) => func(...args));
             }
+        },
+        getProjectHistory: () => {
+            return settings.getProjectHistory()
         }
     }
 );

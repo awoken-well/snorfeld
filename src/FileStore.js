@@ -9,13 +9,17 @@ export const files = writable({})
         files.set(_files)
     }
 
-    window.api.receive('project:opened', (data) => {
+export function openProject(path){
         resetProject()
-        console.log("opening project at:", data.path)
-        document.title = data.path
+        console.log("opening project at:", path)
+        document.title = path
         window.api.send('watch:start', {
-            path: data.path
+            path: path
         })
+    }
+
+    window.api.receive('project:opened', (data) => {
+        openProject(data.path)        
     })
 
     window.api.receive('project:closed', () => {

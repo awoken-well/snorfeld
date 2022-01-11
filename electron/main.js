@@ -2,15 +2,14 @@ const {
     app, ipcMain
 } = require("electron");
 
-const Store = require('electron-store')
-const store = new Store()
+const settings = require('./store.js')
 
-const windowManager = require('./windows.js')(store)
+const windowManager = require('./windows.js')(settings)
 
 app.on("ready", () => {
     // open last project
     ipcMain.on('project:openlast', (event, args) => {
-        const projectPath = store.get('lastProjectFolder')
+        const projectPath = settings.getLastProject()
         if (projectPath) {
             console.log('opening last folder: ', projectPath);
             event.sender.send('project:opened', {
@@ -19,7 +18,8 @@ app.on("ready", () => {
         }
     })
 
-    const projectPath = store.get('lastProjectFolder')
+    const projectPath = settings.getLastProject()
+    console.log(settings.getProjectHistory())
     windowManager.createWindow(projectPath)
 })
 
