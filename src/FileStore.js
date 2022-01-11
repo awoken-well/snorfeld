@@ -24,27 +24,30 @@ export const files = writable({})
 
 
     window.api.receive('watch:added', (data) => {
-        console.log('file add received')
         _files[data.path] = data
         files.set(_files)
     })
     
     window.api.receive('watch:removed', (data) => {
-        console.log('file remove received')
         delete _files[data.path]
         files.set(_files)
     })
     
     window.api.receive('watch:updated', (data) => {
-        console.log('file update received')
         _files[data.path] = data
         files.set(_files)
-        console.log('done setting')
     })
 
     export const updateRawText = (path, raw) => {
         window.api.send('file:write', {
             path: path,
             raw: raw
+        })
+    }
+
+    export const renameFile = (path, newPath) => {
+        window.api.send('file:rename', {
+            path: path,
+            newPath: newPath
         })
     }

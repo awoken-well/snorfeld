@@ -4,29 +4,44 @@ import {
     get
 } from 'svelte/store'
 import {
-    files
+    files,
+    renameFile
 } from './FileStore.js'
+
+
+function Fragment(fragment) {
+	const { subscribe, set, update } = writable(fragment)
+
+	return {
+		subscribe,
+        set,
+        rename: (filename) => {
+            let slash = fragment.path.lastIndexOf('/')
+            let newPath = fragment.path.slice(0, slash + 1) + filename
+            console.log('renaming to: ', newPath)
+            renameFile(fragment.path, newPath)
+        }
+	}
+}
 
 let _fragments = {}
 
 export const fragments = derived(files, $files => {
     let __fragments = {}
     Object.values($files).forEach(f => {
-        console.log('updating fragment:', f.path)
         if (!_fragments[f.path] || get(_fragments[f.path]).lastModified != f.lastModified) {
             let fragment = {
                 id: f.path,
                 slug: f.path.split("/").pop().split('.')[0],
+                filename: f.path.split("/").pop(),
                 path: f.path,
                 raw: f.raw,
                 lastModified: f.lastModified,
                 parsed: f.parsed
             }
             if (!_fragments[f.path]){
-                console.log('create writable')
-                _fragments[f.path] = writable(fragment)
+                _fragments[f.path] = Fragment(fragment)
             } else {
-                console.log('update writable', __fragments[f.path])
                 _fragments[f.path].set(fragment)
             }
         } 

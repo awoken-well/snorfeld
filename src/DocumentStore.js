@@ -11,7 +11,7 @@ import { updateRawText } from './FileStore.js'
 import CodeMirror from 'codemirror'
 
 const MODE = {
-    name: 'yaml-frontmatter',
+    name: 'yaml-frontmatter-snorfeld',
     highlightFormatting: true
 }
 let _documents = {}

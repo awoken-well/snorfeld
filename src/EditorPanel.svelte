@@ -10,7 +10,6 @@ let existingDocument
 let editor
 
 $: {
-    console.log('newdoc: ', document)
     if (existingDocument) {
         // update the scroll state in the editor
         scrollState[existingDocument.id] = scrollElement.scrollTop

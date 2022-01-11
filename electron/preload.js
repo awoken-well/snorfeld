@@ -12,6 +12,7 @@ contextBridge.exposeInMainWorld(
             let validChannels = [
                 'watch:start',
                 'file:write',
+                'file:rename',
                 'parser:parse','parser:string',
                 'project:openlast'];
             if (validChannels.includes(channel)) {

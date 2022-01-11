@@ -7,8 +7,9 @@
     --primary-hover-back-color: rgb(41,44,49);
     --primary-hover-front-color: #eee;
 
-    --ui-selected-front-color: rgb(129,246,201);
+	--ui-selected-front-color: rgb(129,246,201);
     --ui-selected-back-color: rgb(64,123,100);
+	--ui-selected-back-color-unfocus: rgba(64,123,100, 0.5);
 	--ui-borders: rgb(128,128,128);
 	}
 

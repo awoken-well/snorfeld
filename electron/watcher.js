@@ -1,6 +1,7 @@
 const chokidar = require("chokidar");
 const matter = require("gray-matter");
 const fs = require("fs");
+const { rename } = require("original-fs");
 
 
 module.exports = function Watcher(ipcMain, win) {
@@ -12,13 +13,19 @@ module.exports = function Watcher(ipcMain, win) {
 
         const path = args.path;
         watch(path);
-    });
+    })
 
     ipcMain.on('file:write', (event, args) => {
         if (win.webContents.id != event.sender.id) return
         console.log('Saving', args.path)
         save(args.path, args.raw)
-    });
+    })
+
+    ipcMain.on('file:rename', (event, args) => {
+        if (win.webContents.id != event.sender.id) return
+        console.log('Rename ', args.path, ' to ', args.newPath)
+        rename(args.path, args.newPath)
+    })
 
     let watcher
 
@@ -84,6 +91,10 @@ module.exports = function Watcher(ipcMain, win) {
     function save(path, raw) {
         console.log('saving file at ', path)
         fs.writeFileSync(path, raw)
+    }
+
+    function rename(path, newPath) {
+        fs.renameSync(path, newPath)
     }
 
     return {
