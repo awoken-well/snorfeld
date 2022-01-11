@@ -47,17 +47,15 @@
 .mirror .CodeMirror .cm-def,
 .mirror .CodeMirror .cm-atom,
 .mirror .CodeMirror .cm-meta {
-    font-family: 'Courier New', Courier, monospace;
     color: var(--emphasis-front-color)
-}
-
-.mirror .CodeMirror .cm-meta + * {
-    font-family: 'Courier New', Courier, monospace;
 }
 
 .mirror .CodeMirror .cm-string,
 .mirror .CodeMirror .cm-keyword,
 .mirror .CodeMirror .cm-number {
-    font-family: 'Courier New', Courier, monospace;
     color: inherit;
 }   
+
+.mirror .CodeMirror .frontmatter  + pre {
+    font-family: 'Courier New', Courier, monospace;
+}
