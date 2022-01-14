@@ -1,8 +1,10 @@
 <script>
-import SplitPanel from './SplitPanel.svelte'
-import ListPanel from './ListPanel.svelte'
+import SplitPanel from './components/layout/SplitPanel.svelte'
+import ListPanelGrouped from './ListPanelGrouped.svelte'
 import EditorPanel from './EditorPanel.svelte'
 import WelcomePanel from './WelcomePanel.svelte'
+import ResizableFlex from './components/layout/ResizableFlex.svelte'
+import CardPanel from './CardPanel.svelte'
 
 import {currentDocument} from './DocumentStore'
 import {files} from './FileStore'
@@ -19,11 +21,12 @@ $: showWelcome = Object.values($files).length == 0
 	{#if showWelcome}
 		<WelcomePanel/>
 	{:else}
-		<SplitPanel>
-				<ListPanel slot="left"/>
+		<ResizableFlex>
+				<ListPanelGrouped slot="left"/>
 				<EditorPanel slot="center" document={mainDocument}/>
+				<CardPanel slot="right"/>
 					<!-- <p slot="right">Truly!</p> -->
-		</SplitPanel>
+		</ResizableFlex>
 	{/if}
 </main>
 
@@ -35,5 +38,4 @@ $: showWelcome = Object.values($files).length == 0
 		height: 100%;
 		position: absolute;
 	}
-
 </style>

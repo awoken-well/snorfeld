@@ -1,9 +1,9 @@
 <script>
-	
+let left	
 </script>
 
 <div class="container">
-    <div class="left">
+    <div bind:this={left} class="left">
         <slot name="left"></slot>
     </div>
     <div class="divider"></div>
@@ -41,7 +41,12 @@
     }
 
     .divider {
-        width:1px;
-        border-left: 1px solid var(--ui-borders);
+        width: 1px;
     }
+
+    .divider:hover {
+        border-left: 1px solid var(--ui-borders);
+        cursor: col-resize;
+    }
+
 </style>

@@ -8,6 +8,7 @@
     
     function setLastProject(path) {
         store.set('lastProjectFolder', path)
+        console.log('SET LAST PROJECT: ', path, getLastProject())
 
         let history = new Set(getProjectHistory())
         history.add(path)

@@ -24,7 +24,6 @@ module.exports = (ipcMain, windowManager, settings) => {
                         })
                         if (!result.canceled) {
                             let path = result.filePaths[0]
-
                             settings.setLastProject(path)
 
                             browserWindow.webContents.send('project:opened', {
@@ -217,6 +216,7 @@ module.exports = (ipcMain, windowManager, settings) => {
         return {
             label: path,
             click: async (menuItem, browserWindow, event) => {
+                settings.setLastProject(path)
                 browserWindow.webContents.send('project:opened', {
                     path: path
                 })

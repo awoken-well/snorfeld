@@ -1,5 +1,6 @@
 :root {
     --back-color: rgb(30,32,34);
+	--header-back-color: rgb(41,42,45);
     --secondary-back-color: rgb(60,100,70);
     --primary-front-color: rgb(206,219,218);
     --emphasis-front-color: rgb(129,201,246);
@@ -11,7 +12,9 @@
     --ui-selected-back-color: rgb(64,123,100);
 	--ui-selected-back-color-unfocus: rgba(64,123,100, 0.5);
 	--ui-borders: rgb(128,128,128);
-	}
+	--ggs: 0.8;
+}
+
 
 html, body {
 	position: relative;
