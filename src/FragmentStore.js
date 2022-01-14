@@ -9,7 +9,7 @@ import {
 } from './FileStore.js'
 
 
-function Fragment(fragment) {
+export function Fragment(fragment) {
 	const { subscribe, set, update } = writable(fragment)
 
 	return {
@@ -18,7 +18,6 @@ function Fragment(fragment) {
         rename: (filename) => {
             let slash = fragment.path.lastIndexOf('/')
             let newPath = fragment.path.slice(0, slash + 1) + filename
-            console.log('renaming to: ', newPath)
             renameFile(fragment.path, newPath)
         }
 	}

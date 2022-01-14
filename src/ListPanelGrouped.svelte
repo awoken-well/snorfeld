@@ -10,7 +10,7 @@ $: groupedFragments = FragmentData($fragments).groupByDataKey('type')
 
 <div class="container">
 	{#each groupedFragments as group (group.key)}
-	<ListPanelGroup group={group}/>
+	<ListPanelGroup group={group} key="type"/>
 	{/each}
 </div>
 

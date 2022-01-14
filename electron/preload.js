@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld(
             let validChannels = [
                 'watch:start',
                 'file:write',
+                'file:writedata',
                 'file:rename',
                 'parser:parse','parser:string',
                 'project:openlast',

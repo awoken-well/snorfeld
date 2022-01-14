@@ -42,7 +42,7 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 		border-radius: 1em;
 		display: block;
 		width: 30ch;
-		margin: 1em;
+		margin: 0.5em;
 	}
 
 	card header {

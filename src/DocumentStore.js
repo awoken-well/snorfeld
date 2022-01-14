@@ -3,10 +3,10 @@ import {
     get
 } from 'svelte/store'
 import {
+    fragments,
     selectedFragment
 } from './FragmentStore.js'
 import { updateRawText } from './FileStore.js'
-
 
 import CodeMirror from 'codemirror'
 
@@ -16,9 +16,25 @@ const MODE = {
 }
 let _documents = {}
 
+// clean the internal document storage if fragments disappear
+fragments.subscribe((fs)=>{
+    const validIds = Object.keys(fs)
+    Object.keys(_documents).forEach((did)=>{
+        if (!validIds.includes(did)) {
+            delete _documents[did]
+
+            if (get(currentDocument) && get(currentDocument).id == did) {
+                selectedFragment.set(null)
+            }
+        }
+    })
+    
+})
+
+
 // update the current document based on the selection and create a new document if needed
 export const currentDocument = derived(selectedFragment, $selectedFragment => {
-    if (!$selectedFragment) return null
+    if (!get($selectedFragment)) return null
 
     let fragment = get($selectedFragment)
     if (!_documents[fragment.id]) {
@@ -54,3 +70,4 @@ export const currentDocument = derived(selectedFragment, $selectedFragment => {
     }
     return _documents[fragment.id]
 })
+
