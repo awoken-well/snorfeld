@@ -1,13 +1,12 @@
 <script>
-import SplitPanel from './components/layout/SplitPanel.svelte'
-import ListPanelGrouped from './ListPanelGrouped.svelte'
-import EditorPanel from './EditorPanel.svelte'
-import WelcomePanel from './WelcomePanel.svelte'
+import ListPanelGrouped from './components/listpanel/ListPanelGrouped.svelte'
+import EditorPanel from './components/editorpanel/EditorPanel.svelte'
+import WelcomePanel from './components/welcome/WelcomePanel.svelte'
 import ResizableFlex from './components/layout/ResizableFlex.svelte'
-import CardPanel from './CardPanel.svelte'
+import CardPanel from './components/cardpanel/CardPanel.svelte'
 
-import {currentDocument} from './DocumentStore'
-import {files} from './FileStore'
+import {currentDocument} from './stores/DocumentStore'
+import {files} from './stores/FileStore'
 
 let mainDocument
 $: mainDocument = $currentDocument

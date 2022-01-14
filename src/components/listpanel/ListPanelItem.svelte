@@ -1,15 +1,21 @@
 <script>
 import {get} from 'svelte/store'
-import {fragments, selectedFragment} from './FragmentStore.js'
+import {fragments, selectedFragment} from '../../stores/FragmentStore.js'
 
 function selectFragment(fragment) {
-	selectedFragment.set(fragment)
+	selectedFragment.set($fragments[fragment.id])
 }
 
-let fragmentList = []
-$: fragmentList = Object.values($fragments).sort((a,b) => ('' + get(a).path).localeCompare(get(b).path))
+export let fragment
 
 let renameMode = {mode: false, value: ''}
+
+let selected = false
+$: selected = $selectedFragment && fragment.id == get($selectedFragment).id
+
+let editable = false
+$: editable = selected && renameMode.mode
+
 
 function onKeyUp(event) {
 	if (event.keyCode === 13) {
@@ -46,34 +52,22 @@ function doRename(){
 
 </script>
 
-<ul>
-	{#each fragmentList as fragment (get(fragment).id)}
-		<li on:click={selectFragment(fragment)} 
-			on:keyup={onKeyUp} 
-			tabindex="0" 
-			class:selected={$selectedFragment && get(fragment).id == get($selectedFragment).id} 
-			class:editable="{$selectedFragment && get(fragment).id == get($selectedFragment).id && renameMode.mode}" >
-				<span>{get(fragment).slug}</span>
-				<input 
-					on:blur={onUnfocus}
-					on:input={onInput}
-					type="text" 
-					value="{get(fragment).filename}"/>
-			</li>
-	{/each}
-</ul>
+<li on:click={selectFragment(fragment)} 
+	on:keyup={onKeyUp} 
+	tabindex="0" class:selected class:editable >
+		<gg-icon class="gg-file-document"></gg-icon><span>{fragment.slug}</span>
+		<input 
+			on:blur={onUnfocus}
+			on:input={onInput}
+			type="text" 
+			value="{fragment.filename}"/>
+</li>
 
 <style>
-	ul {
-		overflow-y: scroll;
-		position: absolute;
-		overflow-x: hidden;
-		width: 100%;
-		height: 100%;
-		padding: 0.5em;
-		list-style: none;
-		font-size: 0.8em;
-		box-sizing: border-box;
+	li gg-icon {
+		--ggs: 0.6;
+		vertical-align: middle;
+		margin-right: 0.5em;
 	}
 
 	li {
@@ -113,6 +107,11 @@ function doRename(){
 
 	li.editable input {
 		display: block;
+	}
+
+	gg-icon {
+		display: inline-block;
+		vertical-align: bottom;
 	}
 
 </style>

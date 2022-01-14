@@ -1,5 +1,5 @@
 <script>
-  import {openProject} from './FileStore.js'
+  import {openProject} from '../../stores/FileStore.js'
 
   let history = window.api.getProjectHistory()
 </script>

@@ -1,8 +1,8 @@
 <script>
 import ListPanelItem from './ListPanelItem.svelte'
-import FragmentData from './FragmentData.js'
-import {fragments} from './FragmentStore.js'
-import {createWithData} from './FileStore.js'
+import FragmentData from '../../stores/FragmentData.js'
+import {fragments} from '../../stores/FragmentStore.js'
+import {createWithData} from '../../stores/FileStore.js'
 
 export let group
 export let key

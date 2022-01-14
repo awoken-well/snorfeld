@@ -1,6 +1,6 @@
 <script>
-import {fragments} from './FragmentStore.js'
-import FragmentData from './FragmentData.js'
+import {fragments} from '../../stores/FragmentStore.js'
+import FragmentData from '../../stores/FragmentData.js'
 import ListPanelGroup from './ListPanelGroup.svelte'
 
 let groupedFragments = []

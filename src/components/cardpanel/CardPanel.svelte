@@ -1,8 +1,6 @@
 <script>
-import {get} from 'svelte/store'
-import {fragments, selectedFragment} from './FragmentStore.js'
-
-import FragmentData from './FragmentData.js'
+import {fragments} from '../../stores/FragmentStore.js'
+import FragmentData from '../../stores/FragmentData.js'
 
 let groupedFragments = []
 $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene')

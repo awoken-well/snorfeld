@@ -1,6 +1,6 @@
 <script>
-import CodeMirror from './components/codemirror/CodeMirror.svelte'
-import './components/codemirror/customstyle.css'
+import CodeMirror from '../codemirror/CodeMirror.svelte'
+import '../codemirror/customstyle.css'
 
 export let document = null
 
