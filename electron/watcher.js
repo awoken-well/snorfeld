@@ -36,6 +36,12 @@ module.exports = function Watcher(ipcMain, win) {
         rename(args.path, args.newPath)
     })
 
+    ipcMain.on('file:delete', (event, args) => {
+        if (win.webContents.id != event.sender.id) return
+        console.log('Delete ', args.path)
+        unlink(args.path)
+    })
+
     let watcher
 
     async function watch(path) {
@@ -103,6 +109,10 @@ module.exports = function Watcher(ipcMain, win) {
 
     function rename(path, newPath) {
         fs.renameSync(path, newPath)
+    }
+
+    function unlink(path) {
+        fs.unlinkSync(path)
     }
 
     return {

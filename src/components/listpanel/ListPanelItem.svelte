@@ -50,12 +50,17 @@ function doRename(){
 	get(selectedFragment).rename(renameMode.value)
 }
 
+function trashFragment() {
+	get(selectedFragment).delete()
+}
+
 </script>
 
 <li on:click={selectFragment(fragment)} 
 	on:keyup={onKeyUp} 
 	tabindex="0" class:selected class:editable >
 		<gg-icon class="gg-file-document"></gg-icon><span>{fragment.slug}</span>
+		<menu><gg-icon on:click={trashFragment} class="gg-trash"></gg-icon></menu>
 		<input 
 			on:blur={onUnfocus}
 			on:input={onInput}
@@ -64,6 +69,20 @@ function doRename(){
 </li>
 
 <style>
+	menu {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		display: none;
+		justify-content: end;
+	}
+	li.selected:hover menu {
+		display: flex;
+	}
+
 	li gg-icon {
 		--ggs: 0.6;
 		vertical-align: middle;

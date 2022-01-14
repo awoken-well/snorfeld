@@ -16,6 +16,7 @@ contextBridge.exposeInMainWorld(
                 'file:write',
                 'file:writedata',
                 'file:rename',
+                'file:delete',
                 'parser:parse','parser:string',
                 'project:openlast',
                 'settings:projecthistory'];

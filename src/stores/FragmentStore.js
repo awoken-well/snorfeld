@@ -5,7 +5,8 @@ import {
 } from 'svelte/store'
 import {
     files,
-    renameFile
+    renameFile,
+    deleteFile
 } from './FileStore.js'
 
 
@@ -19,6 +20,9 @@ export function Fragment(fragment) {
             let slash = fragment.path.lastIndexOf('/')
             let newPath = fragment.path.slice(0, slash + 1) + filename
             renameFile(fragment.path, newPath)
+        }, 
+        delete: () => {
+            deleteFile(fragment.path)
         }
 	}
 }

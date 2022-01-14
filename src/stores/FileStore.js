@@ -64,3 +64,9 @@ export const renameFile = (path, newPath) => {
         newPath: newPath
     })
 }
+
+export const deleteFile = (path) => {
+    window.api.send('file:delete', {
+        path: path
+    })
+}
