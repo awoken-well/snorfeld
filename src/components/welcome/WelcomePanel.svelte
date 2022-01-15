@@ -9,7 +9,7 @@
   <p>Please open a project.</p>
   <ul>
     {#each history as project}
-    <li on:click={()=>openProject(project)}><span class="name">{project.split('/').pop()}</span><span class="folder">({project})</span></li>
+    <li on:click={()=>openProject(project.path)}><span class="name">{project.dir}</span><span class="folder">({project.path})</span></li>
     {/each}
   </ul>
 </div>
