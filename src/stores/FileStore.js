@@ -30,7 +30,7 @@ window.api.receive('project:closed', () => {
 
 
 window.api.receive('watch:added', (data) => {
-    _files[data.path] = data
+    _files[data.id] = data
     files.set(_files)
 })
 
@@ -40,20 +40,6 @@ window.api.receive('watch:removed', (data) => {
 })
 
 window.api.receive('watch:updated', (data) => {
-    _files[data.path] = data
+    _files[data.id] = data
     files.set(_files)
 })
-
-export const updateRawText = (path, raw) => {
-    window.api.send('file:write', {
-        path: path,
-        raw: raw
-    })
-}
-
-export const createWithData = (path, data) => {
-    window.api.send('file:writedata', {
-        path: path,
-        data: data
-    })
-}

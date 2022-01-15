@@ -2,16 +2,14 @@
 import ListPanelItem from './ListPanelItem.svelte'
 import FragmentData from '../../stores/FragmentData.js'
 import {fragments} from '../../stores/FragmentStore.js'
-import {createWithData} from '../../stores/FileStore.js'
 
 export let group
 export let key
 
 let folded = false
 
-function addNewFragment(e) {
-	const fragment = FragmentData($fragments).newFragmentForKeyValue(key, group.key)
-	createWithData(fragment.path, fragment.parsed)
+function addNewFragment() {
+	FragmentData($fragments).newFragmentForKeyValue(key, group.key)
 }
 
 </script>

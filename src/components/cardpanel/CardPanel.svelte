@@ -10,7 +10,7 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 <div class="container">
 	{#each groupedFragments as fragment (fragment.id)}
 		<card>
-			<header>{fragment.slug}</header>
+			<header>{fragment.path.name}</header>
 			{#each Object.keys(fragment.parsed.data) as key}
 				<p title="{key}">{fragment.parsed.data[key]}</p>
 			{/each}

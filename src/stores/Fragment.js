@@ -8,17 +8,17 @@ export function Fragment(fragment) {
 	return {
 		subscribe,
         set,
+        update,
         rename: (filename) => {
-            let folder = window.api.parsePath(expath).dir
-            let newPath = window.api.joinPath([folder, filename])
+            let newPath = window.api.joinPath([fragment.path.dir, filename])
             window.api.send('file:rename', {
-                path: fragment.path,
+                path: fragment.id,
                 newPath: newPath
             })        
         }, 
         delete: () => {
             window.api.send('file:delete', {
-                path: fragment.path
+                path: fragment.id
             })
         
         }

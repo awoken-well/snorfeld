@@ -59,13 +59,13 @@ function trashFragment() {
 <li on:click={selectFragment(fragment)} 
 	on:keyup={onKeyUp} 
 	tabindex="0" class:selected class:editable >
-		<gg-icon class="gg-file-document"></gg-icon><span>{fragment.slug}</span>
+		<gg-icon class="gg-file-document"></gg-icon><span>{fragment.path.name}</span>
 		<menu><gg-icon on:click={trashFragment} class="gg-trash"></gg-icon></menu>
 		<input 
 			on:blur={onUnfocus}
 			on:input={onInput}
 			type="text" 
-			value="{fragment.filename}"/>
+			value="{fragment.path.base}"/>
 </li>
 
 <style>

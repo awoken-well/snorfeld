@@ -44,9 +44,7 @@ export default function (fragments) {
 
         let fragment = {
             id: path,
-            slug: parsedPath.name,
-            filename: parsedPath.base,
-            path: path,
+            path: parsedPath,
             raw: '\n',
             lastModified: 0,
             parsed: {
@@ -64,16 +62,18 @@ export default function (fragments) {
     function newFragmentForKeyValue(key, value) {
         // get first path
         let group = groupByDataKeyValue(key, value)
-        let expath = group[0].path
-        let folder = window.api.parsePath(expath).dir
-        let path = window.api.joinPath([folder, 'untitled.md'])
+        let path = window.api.joinPath([group[0].path.dir, 'untitled.md'])
         
         let fragment = newFragment(path)
         let keys = getAllKeysForGroup(group)
         keys.forEach((k)=>{fragment.parsed.data[k] = ''})
 
         fragment.parsed.data[key] = value
-        return fragment
+
+        window.api.send('file:writedata', {
+            path: fragment.id,
+            data: fragment.parsed
+        })
     }
 
     return {

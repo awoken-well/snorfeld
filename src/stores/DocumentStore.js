@@ -6,7 +6,6 @@ import {
     fragments,
     selectedFragment
 } from './FragmentStore.js'
-import { updateRawText } from './FileStore.js'
 
 import CodeMirror from 'codemirror'
 
@@ -52,8 +51,11 @@ export const currentDocument = derived(selectedFragment, $selectedFragment => {
             saveTimerHandle = window.setTimeout(() => {
                 saveGeneration = doc.changeGeneration()
                 console.log('saving')
-                updateRawText(doc.id, doc.getValue())
-            }, 3000)
+                window.api.send('file:write', {
+                    path: doc.id,
+                    raw: doc.getValue()
+                })
+            }, 500)
         })
 
         // subscribe to outside changes

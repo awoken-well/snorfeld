@@ -1,10 +1,10 @@
-const chokidar = require("chokidar");
-const matter = require("gray-matter");
-const fs = require("fs");
+const chokidar = require("chokidar")
+const matter = require("gray-matter")
+const fs = require("fs")
 const {
     rename
-} = require("original-fs");
-
+} = require("original-fs")
+const path = require('path')
 
 module.exports = function Watcher(ipcMain, win) {
 
@@ -72,11 +72,13 @@ module.exports = function Watcher(ipcMain, win) {
             .on('ready', () => console.log('Initial scan complete. Ready for changes'))
     }
 
-    function getFile(path) {
-        let raw = fs.readFileSync(path).toLocaleString()
-        let stats = fs.statSync(path)
+    function getFile(_path) {
+        let raw = fs.readFileSync(_path).toLocaleString()
+        let stats = fs.statSync(_path)
+
         return {
-            path: path,
+            id: _path,
+            path: path.parse(_path),
             lastModified: stats.mtimeMs,
             raw: raw,
             parsed: matter(raw, {

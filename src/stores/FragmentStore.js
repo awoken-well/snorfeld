@@ -13,24 +13,14 @@ let _fragments = {}
 export const fragments = derived(files, $files => {
     let __fragments = {}
     Object.values($files).forEach(f => {
-        if (!_fragments[f.path] || get(_fragments[f.path]).lastModified != f.lastModified) {
-            let parsedPath = window.api.parsePath(f.path)
-            let fragment = {
-                id: f.path,
-                slug: parsedPath.name,
-                filename: parsedPath.base,
-                path: f.path,
-                raw: f.raw,
-                lastModified: f.lastModified,
-                parsed: f.parsed
-            }
-            if (!_fragments[f.path]){
-                _fragments[f.path] = Fragment(fragment)
+        if (!_fragments[f.id] || get(_fragments[f.id]).lastModified != f.lastModified) {
+            if (!_fragments[f.id]){
+                _fragments[f.id] = Fragment(f)
             } else {
-                _fragments[f.path].set(fragment)
+                _fragments[f.id].set(f)
             }
         } 
-        __fragments[f.path] = _fragments[f.path]
+        __fragments[f.id] = _fragments[f.id]
     })
     _fragments = __fragments
     return _fragments
