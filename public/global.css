@@ -81,6 +81,24 @@ button:focus {
 	border-color: #666;
 }
 
-body::-webkit-scrollbar-track {
-	background: black; 
-}
+/* Works on Firefox */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: blue orange;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+	width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+	/* background: orange; */
+	background: transparent
+  }
+  
+  *::-webkit-scrollbar-thumb {
+	background-color: var(--header-back-color);
+	border-radius: 20px;
+	/* border: 3px solid orange; */
+  }
