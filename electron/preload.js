@@ -37,7 +37,12 @@ contextBridge.exposeInMainWorld(
             }
         },
         getProjectHistory: () => {
-            return settings.getProjectHistory()
+            return settings.getProjectHistory().map((p)=> {
+                return {
+                    dir: p.split(path.sep).pop(),
+                    path: p
+                }
+            })
         },
         parsePath: (url) => {
             return path.parse(url)
