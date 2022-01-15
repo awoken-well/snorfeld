@@ -40,10 +40,12 @@ export default function (fragments) {
     }
 
     function newFragment(path) {
+        let parsedPath = window.api.parsePath(path)
+
         let fragment = {
             id: path,
-            slug: path.split("/").pop().split('.')[0],
-            filename: path.split("/").pop(),
+            slug: parsedPath.name,
+            filename: parsedPath.base,
             path: path,
             raw: '\n',
             lastModified: 0,
@@ -63,8 +65,8 @@ export default function (fragments) {
         // get first path
         let group = groupByDataKeyValue(key, value)
         let expath = group[0].path
-        let folder = expath.substr(0, expath.lastIndexOf("/"))
-        let path = folder + '/' + 'untitled.md'
+        let folder = window.api.parsePath(expath).dir
+        let path = window.api.joinPath([folder, 'untitled.md'])
         
         let fragment = newFragment(path)
         let keys = getAllKeysForGroup(group)

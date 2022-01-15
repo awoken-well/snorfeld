@@ -33,10 +33,11 @@ export const fragments = derived(files, $files => {
     let __fragments = {}
     Object.values($files).forEach(f => {
         if (!_fragments[f.path] || get(_fragments[f.path]).lastModified != f.lastModified) {
+            let parsedPath = window.api.parsePath(f.path)
             let fragment = {
                 id: f.path,
-                slug: f.path.split("/").pop().split('.')[0],
-                filename: f.path.split("/").pop(),
+                slug: parsedPath.name,
+                filename: parsedPath.base,
                 path: f.path,
                 raw: f.raw,
                 lastModified: f.lastModified,

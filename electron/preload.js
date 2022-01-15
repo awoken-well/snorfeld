@@ -3,6 +3,8 @@ const {
     ipcRenderer
 } = require("electron")
 
+const path = require('path')
+
 const settings = require('./store.js')
 
 // Expose protected methods that allow the renderer process to use
@@ -36,6 +38,12 @@ contextBridge.exposeInMainWorld(
         },
         getProjectHistory: () => {
             return settings.getProjectHistory()
+        },
+        parsePath: (url) => {
+            return path.parse(url)
+        },
+        joinPath: (parts) => {
+            return path.join(...parts)
         }
     }
 );
