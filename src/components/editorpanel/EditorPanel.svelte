@@ -36,7 +36,7 @@ $: {
         visibility: hidden;
     }
 .mirror {
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 100%;
     height: 100%;
     position: relative;

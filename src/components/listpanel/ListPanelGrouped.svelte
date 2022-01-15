@@ -17,7 +17,7 @@ $: groupedFragments = FragmentData($fragments).groupByDataKey('type')
 
 <style>
 	.container {
-		overflow-y: scroll;
+		overflow-y: auto;
 		position: absolute;
 		overflow-x: hidden;
 		width: 100%;

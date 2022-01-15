@@ -8,6 +8,10 @@
     margin: 2em auto;
 }
 
+.mirror .CodeMirror-scroll {
+    min-height: 90vh;
+}
+
 .mirror .CodeMirror-line::selection, 
 .mirror .CodeMirror-line > span::selection, 
 .mirror .CodeMirror-line > span > span::selection,

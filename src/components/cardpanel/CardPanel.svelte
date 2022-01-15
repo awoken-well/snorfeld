@@ -21,7 +21,7 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 
 <style>
 	.container {
-		overflow-y: scroll;
+		overflow-y: auto;
 		position: absolute;
 		overflow-x: hidden;
 		width: 100%;
@@ -37,13 +37,14 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 
 	card {
 		border: 1px solid var(--header-back-color);
-		border-radius: 1em;
+		border-radius: 0.5em;
 		display: block;
 		width: 30ch;
 		margin: 0.5em;
 	}
 
 	card header {
+		border-radius: 0.5em 0.5em 0 0;
 		text-align: center;
 		user-select: none;
 		line-height: 1.5em;
