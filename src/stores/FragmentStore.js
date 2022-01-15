@@ -5,27 +5,8 @@ import {
 } from 'svelte/store'
 import {
     files,
-    renameFile,
-    deleteFile
 } from './FileStore.js'
-
-
-export function Fragment(fragment) {
-	const { subscribe, set, update } = writable(fragment)
-
-	return {
-		subscribe,
-        set,
-        rename: (filename) => {
-            let slash = fragment.path.lastIndexOf('/')
-            let newPath = fragment.path.slice(0, slash + 1) + filename
-            renameFile(fragment.path, newPath)
-        }, 
-        delete: () => {
-            deleteFile(fragment.path)
-        }
-	}
-}
+import {Fragment} from './Fragment.js'
 
 let _fragments = {}
 

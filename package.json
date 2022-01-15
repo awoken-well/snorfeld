@@ -36,7 +36,6 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.1",
     "gray-matter": "^4.0.3",
-    "monaco-editor": "^0.18.1",
     "sirv-cli": "^1.0.0"
   },
   "config": {

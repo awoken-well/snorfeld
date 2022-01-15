@@ -13,7 +13,9 @@ const windows = new Set();
 const createWindow = async (projectPath) => {
     let newWindow = new BrowserWindow({
         show: false,
-        width: 600,
+        // frame: false,
+        // titleBarStyle: 'hidden',
+        width: 1200,
         height: 800,
         webPreferences: {
             nodeIntegration: false, // is default value after Electron v5

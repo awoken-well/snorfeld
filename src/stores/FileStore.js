@@ -57,16 +57,3 @@ export const createWithData = (path, data) => {
         data: data
     })
 }
-
-export const renameFile = (path, newPath) => {
-    window.api.send('file:rename', {
-        path: path,
-        newPath: newPath
-    })
-}
-
-export const deleteFile = (path) => {
-    window.api.send('file:delete', {
-        path: path
-    })
-}
