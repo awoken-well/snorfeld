@@ -7,6 +7,7 @@ import CardPanel from './components/cardpanel/CardPanel.svelte'
 
 import {currentDocument} from './stores/DocumentStore'
 import {files} from './stores/FileStore'
+import {frequencies} from './stores/WordFrequency'
 
 let mainDocument
 $: mainDocument = $currentDocument

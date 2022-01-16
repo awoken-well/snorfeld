@@ -1,6 +1,7 @@
 <script>
 import {fragments} from '../../stores/FragmentStore.js'
 import FragmentData from '../../stores/FragmentData.js'
+import {frequencies} from '../../stores/WordFrequency'
 
 let groupedFragments = []
 $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene')
@@ -14,6 +15,11 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 			{#each Object.keys(fragment.parsed.data) as key}
 				<p title="{key}">{fragment.parsed.data[key]}</p>
 			{/each}
+			<div class="tagcloud">
+				{#each frequencies.topTerms(fragment.id, 5) as term}
+					<span class="tag">{term[0]}</span>
+				{/each}
+			</div>
 		</card>
 	{/each}
 </div>
@@ -55,5 +61,19 @@ $: groupedFragments = FragmentData($fragments).groupByDataKeyValue('type','scene
 
 	card p {
 		margin: 0.5em;
+	}
+
+	.tag {
+		margin-right: 0.5em;
+		margin-bottom: 0.5em;
+		padding: 0.25em;
+		background-color: var(--ui-selected-back-color-unfocus);
+		border-radius: 1em;
+	}
+
+	.tagcloud {
+		padding: 0.5em;
+		display: flex;
+		flex-wrap: wrap;
 	}
 </style>
