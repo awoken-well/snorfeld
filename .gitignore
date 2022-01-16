@@ -112,3 +112,6 @@ out
 
 # Svelte build folder
 public/build
+
+# config and keys
+keys.json
