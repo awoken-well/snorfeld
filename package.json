@@ -1,5 +1,7 @@
 {
   "name": "snorfeld",
+  "description": "a MarkDown document manager",
+  "author": "Olaf T.A. Janssen <olaf@awokenwell.com> (https://awokenwell.com)",
   "version": "1.0.0",
   "private": true,
   "main": "electron/main.js",
@@ -26,18 +28,16 @@
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
     "rollup-plugin-terser": "^7.0.0",
+    "electron-squirrel-startup": "^1.0.0",
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "@coreui/icons": "^2.1.0",
     "chokidar": "^3.5.2",
     "codemirror": "^5.65.0",
     "css.gg": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.1",
     "gray-matter": "^4.0.3",
     "nlpcloud": "^1.0.13",
-    "sirv-cli": "^1.0.0",
     "tiny-tfidf": "^0.9.1"
   },
   "config": {
