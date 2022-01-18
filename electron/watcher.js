@@ -11,8 +11,6 @@ module.exports = function Watcher(ipcMain, win) {
     ipcMain.on('watch:start', (event, args) => {
         if (win.webContents.id != event.sender.id) return
         console.log('Started watching: ', args.path)
-        console.log(win.webContents.id, event.sender.id)
-
         const path = args.path;
         watch(path);
     })
@@ -76,15 +74,26 @@ module.exports = function Watcher(ipcMain, win) {
         let raw = fs.readFileSync(_path).toLocaleString()
         let stats = fs.statSync(_path)
 
+        let parsed = {
+            data: {},
+            content: ''
+        }
+
+        try {
+            parsed = matter(raw, {
+                excerpt: false,
+                sections: false
+            })
+        } catch (error) {
+            console.log('parse error:', error)
+        }
+
         return {
             id: _path,
             path: path.parse(_path),
             lastModified: stats.mtimeMs,
             raw: raw,
-            parsed: matter(raw, {
-                excerpt: false,
-                sections: false
-            })
+            parsed: parsed
         }
     }
 

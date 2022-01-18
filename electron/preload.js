@@ -24,8 +24,6 @@ async function summarizeRaw(raw) {
     let tokenLimit = Math.floor(rawTokens / (Math.floor(rawTokens/apiMaxTokens) + 1))
     console.log('Local token limit:', rawTokens, tokenLimit)
 
-
-
     let buffer = []
     let bufferCount = 0
     let summary = ''
@@ -71,6 +69,7 @@ contextBridge.exposeInMainWorld(
                 'project:openlast',
                 'settings:projecthistory'];
             if (validChannels.includes(channel)) {
+                console.log('send:', channel)
                 ipcRenderer.send(channel, data);
             }
         },
@@ -80,7 +79,8 @@ contextBridge.exposeInMainWorld(
                 'parser:parsed','parser:strung',
                 'project:opened','project:closed'];
             if (validChannels.includes(channel)) {
-                // Deliberately strip event as it includes `sender` 
+                // Deliberately strip event as it includes `sender`
+                console.log('receive:', channel)
                 ipcRenderer.on(channel, (event, ...args) => func(...args));
             }
         },
@@ -99,8 +99,6 @@ contextBridge.exposeInMainWorld(
             return path.join(...parts)
         },
         headline: async (raw) => {
-            console.log('headlining: ', raw)
-            // clean text
             raw = raw.replace(/[_*'"]+/g,'').trim()
             console.log(raw, raw.split(' ').length)
 
