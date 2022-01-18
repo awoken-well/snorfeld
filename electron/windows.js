@@ -68,7 +68,8 @@ const createWindow = async (projectPath) => {
 let store
 
 let manager = {
-    createWindow
+    createWindow,
+    windows
 }
 
 module.exports = (_store) => {
