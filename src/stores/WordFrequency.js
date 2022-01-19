@@ -14,9 +14,9 @@ let corpus = new Corpus(
 )
 
 fragments.subscribe((fs) => {
-    corpus = new Corpus(
+   corpus = new Corpus(
         Object.keys(fs),
-        Object.values(fs).map((f) => get(f).parsed.content == ''? 'empty' : get(f).parsed.content)
+        Object.values(fs).map((f) => get(f).parsed.content.trim() == ''? 'empty' : get(f).parsed.content)
     )
 })
 
