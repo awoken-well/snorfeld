@@ -103,7 +103,7 @@ contextBridge.exposeInMainWorld(
             console.log(raw, raw.split(' ').length)
 
             let headline = await headlineClient.summarization(raw).catch(err => {console.log(err)})
-            return headline.data.summary_text
+            return headline.data.summary_text.trim()
         },
         summarize: async (raw) => {
             const max_length = 100
@@ -113,7 +113,7 @@ contextBridge.exposeInMainWorld(
                 rawTokens = raw.split(' ').length
             }
 
-            return raw
+            return raw.trim()
         }
     }
 );

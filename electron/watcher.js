@@ -24,7 +24,7 @@ module.exports = function Watcher(ipcMain, win) {
     ipcMain.on('file:writedata', (event, args) => {
         if (win.webContents.id != event.sender.id) return
         console.log('New from data', args.path)
-        const raw = matter.stringify(args.data.content, args.data.data)
+        const raw = matter.stringify(args.data.content, args.data.data, {lineWidth: -1})
         save(args.path, raw)
     })
 
